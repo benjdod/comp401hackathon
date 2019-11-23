@@ -1,6 +1,7 @@
 package model;
 
 import main.ChessBoard;
+import main.Move;
 import main.Player;
 
 public class Pawn extends ChessPiece {
@@ -18,6 +19,11 @@ public class Pawn extends ChessPiece {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Move getAllPossibleMoves() {
+        return null; // TODO add this
     }
 
     @Override
