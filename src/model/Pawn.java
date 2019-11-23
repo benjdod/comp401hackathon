@@ -54,11 +54,11 @@ public class Pawn extends ChessPiece {
           {
             moves.add(new Move(Player.BLACK, x, y, x, y-1));
           }
-          if(!_board.getSpotAt(x+1, y-1).isEmpty() && _board.getSpotAt(x-1, y+1).getPieceColor() == Player.Color.BLACK)
+          if(!_board.getSpotAt(x+1, y-1).isEmpty() && _board.getSpotAt(x-1, y+1).getPieceColor() == Player.Color.WHITE)
           {
             moves.add(new Move(Player.BLACK, x, y, x+1, y-1));
           }
-          if(!_board.getSpotAt(x+1, y+1).isEmpty() && _board.getSpotAt(x+1, y+1).getPieceColor() == Player.Color.BLACK)
+          if(!_board.getSpotAt(x+1, y+1).isEmpty() && _board.getSpotAt(x+1, y+1).getPieceColor() == Player.Color.WHITE)
           {
             moves.add(new Move(Player.BLACK, x, y, x-1, y-1));
           }
