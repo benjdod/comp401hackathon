@@ -19,13 +19,14 @@ public class Rook extends ChessPiece {
     @Override
     public ArrayList<Move> getAllPossibleMoves() {
         ArrayList<Move> possibleMoves = new ArrayList<Move>();
-        possibleMoves.addAll(getAllMovesInDirection(1,0));
-        possibleMoves.addAll(getAllMovesInDirection(0,1));
-        possibleMoves.addAll(getAllMovesInDirection(-1,0));
-        possibleMoves.addAll(getAllMovesInDirection(0,-1));
+        possibleMoves.addAll(getLineMovesInDirection(1,0));
+        possibleMoves.addAll(getLineMovesInDirection(0,1));
+        possibleMoves.addAll(getLineMovesInDirection(-1,0));
+        possibleMoves.addAll(getLineMovesInDirection(0,-1));
         return possibleMoves;
     }
 
+<<<<<<< HEAD
 
     public ArrayList<Move> getAllMovesInDirection(int dx, int dy) {
         ArrayList<Move> output = new ArrayList<Move>();
@@ -52,6 +53,8 @@ public class Rook extends ChessPiece {
         return output;
     }
 
+=======
+>>>>>>> fc9a420ff2450cd413499bc9e215344b358573a6
     public int getNumPoints() {
         return 5;
     }

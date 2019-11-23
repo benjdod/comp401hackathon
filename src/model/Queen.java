@@ -21,17 +21,16 @@ public class Queen extends ChessPiece {
     @Override
     public ArrayList<Move> getAllPossibleMoves() {
         ArrayList<Move> possibleMoves = new ArrayList<Move>();
-        possibleMoves.addAll(getAllMovesInDirection(1,0));
-        possibleMoves.addAll(getAllMovesInDirection(0,1));
-        possibleMoves.addAll(getAllMovesInDirection(-1,0));
-        possibleMoves.addAll(getAllMovesInDirection(0,-1));
-        possibleMoves.addAll(getAllMovesInDirection(1,1));
-        possibleMoves.addAll(getAllMovesInDirection(-1,1));
-        possibleMoves.addAll(getAllMovesInDirection(-1,-1));
-        possibleMoves.addAll(getAllMovesInDirection(1,-1));
+        possibleMoves.addAll(getLineMovesInDirection(1,0));
+        possibleMoves.addAll(getLineMovesInDirection(0,1));
+        possibleMoves.addAll(getLineMovesInDirection(-1,0));
+        possibleMoves.addAll(getLineMovesInDirection(0,-1));
+        possibleMoves.addAll(getLineMovesInDirection(1,1));
+        possibleMoves.addAll(getLineMovesInDirection(-1,1));
+        possibleMoves.addAll(getLineMovesInDirection(-1,-1));
+        possibleMoves.addAll(getLineMovesInDirection(1,-1));
         return possibleMoves;
     }
-
 
     public ArrayList<Move> getAllMovesInDirection(int dx, int dy) {
         ArrayList<Move> output = new ArrayList<Move>();

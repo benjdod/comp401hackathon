@@ -14,6 +14,7 @@ public class King extends ChessPiece {
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
+<<<<<<< HEAD
         if(Math.abs(this.getSpotX() - x) <= 1 || Math.abs(this.getY() - y) <= 1) {
             ChessSpot s = _board.getSpotAt(x, y);
             return s.isEmpty() || !s.getPiece().getPlayer().getColor().equals(_player.getColor());
