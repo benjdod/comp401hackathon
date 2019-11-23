@@ -1,14 +1,14 @@
 package model;
 
+import main.*;
+
 public abstract class ChessPiece {
     private int _x;
     private int _y;
-    private Player p;
+    private Player.Color color;
 
-    public enum Player {BLACK, WHITE};
-
-    private ChessPiece(Player player, int xInit, int yInit) {
-        p = (player == Player.WHITE) ? Player.WHITE : Player.BLACK;
+    protected ChessPiece(Player.Color player, int xInit, int yInit) {
+        color = (player == Player.Color.WHITE) ? Player.Color.WHITE : Player.Color.BLACK;
     }
 
     public int getX() {
@@ -19,19 +19,19 @@ public abstract class ChessPiece {
         return _y;
     }
 
-    public abstract boolean getCanMoveToPosition(int x, int y);
+    public abstract boolean getCanMoveToPosition(ChessBoard b, int x, int y);
     public abstract int getNumPoints();
     public abstract String getName(); // "King", "Queen", "Pawn", etc.
 
     public String getPieceColor() {
-        if (p == Player.WHITE) {
+        if (color == Player.Color.WHITE) {
             return "white";
         } else {
             return "black";
         }
     }
 
-    public Player getPlayer() {
-        return p;
+    public Player.Color getPlayer() {
+        return color;
     }
   }
