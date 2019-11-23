@@ -4,10 +4,12 @@ import main.ChessBoard;
 import main.Move;
 import main.Player;
 
+import java.util.ArrayList;
+
 public class Queen extends ChessPiece {
 
-    public Queen (ChessBoard board, Player.Color color, int startX, int startY) {
-        super(board, color, startX, startY);
+    public Queen (ChessBoard board, Player player, int startX, int startY) {
+        super(board, player, startX, startY);
     }
 
     @Override
@@ -17,7 +19,7 @@ public class Queen extends ChessPiece {
     }
 
     @Override
-    public Move getAllPossibleMoves() {
+    public ArrayList<Move> getAllPossibleMoves() {
         return null; // TODO add this
     }
 

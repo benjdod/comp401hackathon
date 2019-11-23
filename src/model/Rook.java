@@ -2,10 +2,12 @@ package model;
 
 import main.*;
 
+import java.util.ArrayList;
+
 public class Rook extends ChessPiece {
 
-    public Rook (ChessBoard board, Player.Color color, int startX, int startY) {
-        super(board, color, startX, startY);
+    public Rook (ChessBoard board, Player player, int startX, int startY) {
+        super(board, player, startX, startY);
     }
 
     public boolean getCanMoveToPosition(int x, int y) {
@@ -13,7 +15,7 @@ public class Rook extends ChessPiece {
     }
 
     @Override
-    public Move getAllPossibleMoves() {
+    public ArrayList<Move> getAllPossibleMoves() {
         return null; // TODO add this
     }
 
