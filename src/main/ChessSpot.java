@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,6 +10,8 @@ import java.awt.event.MouseListener;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.ChessPiece;
@@ -37,6 +40,12 @@ public class ChessSpot extends JPanel implements MouseListener {
         _piece = null;
         
         setBackground(_bgcolor);
+
+        // FOR HANDLING IMAGES
+
+        setLayout(new BorderLayout());
+        JLabel image = new JLabel(new ImageIcon("img/testdim75.png"));
+        add(image,BorderLayout.CENTER);
 
         addMouseListener(this);
     }
