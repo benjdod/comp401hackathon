@@ -125,7 +125,7 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
 
     public ChessBoard clone() {
         ChessSpot[][] newSpots = new ChessSpot[_spots.length][_spots[0].length];
-        ChessBoard output = new ChessBoard(newSpots, );
+        ChessBoard output = new ChessBoard(newSpots, getWhite(), getBlack());
         for (int i = 0; i < newSpots.length; i++) {
             for (int j = 0; j < newSpots[0].length; j++) {
                 newSpots[i][j] = _spots[i][j].clone(output);
