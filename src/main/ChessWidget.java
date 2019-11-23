@@ -73,7 +73,6 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
                     _board.getSelected().getSpotY(), spot.getSpotX(), spot.getSpotY());
             turn = _board.getPlayerNot(turn);
             _board.applyMove(clickedMove);
-
         }
 
     }
