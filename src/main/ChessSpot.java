@@ -41,8 +41,20 @@ public class ChessSpot extends JPanel implements MouseListener {
         addMouseListener(this);
     }
 
+    public int getSpotX() {
+        return _x;
+    }
+
+    public int getSpotY() {
+        return _y;
+    }
+
     public boolean isHighlighted() {
         return _is_highlighted;
+    }
+
+    public boolean isEmpty() {
+        return (_piece == null);
     }
 
     public ChessPiece getPiece() {
@@ -53,6 +65,15 @@ public class ChessSpot extends JPanel implements MouseListener {
         _piece = piece;
     }
 
+    public void selectSpot() {
+        trigger_update();
+    }
+
+    public void deselectSpot() {
+        trigger_update();
+    }
+
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -61,6 +82,8 @@ public class ChessSpot extends JPanel implements MouseListener {
             g2d.setColor(SELECTED_COLOR);
             g2d.setStroke(new BasicStroke(4));
             g2d.drawRect(0, 0, getWidth(), getHeight());
+        } else {
+
         }
         // if (!isEmpty()) {
         // g2d.setColor(getSpotColor());
