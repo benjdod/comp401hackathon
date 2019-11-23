@@ -5,19 +5,22 @@ import main.Player;
 
 public class Queen extends ChessPiece {
 
-    public Queen (Player.Color color, int startX, int startY) {
-        super(color, startX, startY);
+    public Queen (ChessBoard board, Player.Color color, int startX, int startY) {
+        super(board, color, startX, startY);
     }
 
-    public boolean getCanMoveToPosition(ChessBoard b, int x, int y) {
+    @Override
+    public boolean getCanMoveToPosition(int x, int y) {
         return (this.getX() == x || this.getY() == y ||
         this.getX() + this.getY() == x + y || this.getY() - this.getX() == y - x) ? true : false;
     }
 
+    @Override
     public int getNumPoints() {
         return 9;
     }
 
+    @Override
     public String getName() {
         return "Queen";
     } // "King", "Queen", "Pawn", etc.
