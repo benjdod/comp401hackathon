@@ -10,7 +10,22 @@ public class King extends ChessPiece {
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
-        return (Math.abs(this.getX() - x) <= 1 || Math.abs(this.getY() - y) <= 1) ? true : false;
+        if(Math.abs(this.getX() - x) <= 1 || Math.abs(this.getY() - y) <= 1)
+        {
+          ChessSpot s = board.getSpotAt(x, y);
+          if(s.isEmpty() || !s.getPieceColor().equals(this.color))
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+        }
+        else
+        {
+          return false;
+        }
     }
 
     @Override
