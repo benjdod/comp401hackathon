@@ -17,7 +17,9 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
     Player ai = new HumanPlayer(Player.Color.BLACK);
 
     public ChessWidget() {
-        _board = new ChessBoard();
+        HumanPlayer h = new HumanPlayer(Player.Color.WHITE);
+        AIPlayer a = new AIPlayer(Player.Color.BLACK, _board);
+        _board = new ChessBoard(h, a);
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
         _board.addChessSpotListener(this);
