@@ -14,7 +14,6 @@ public class ChessWidget extends JPanel {
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
 
-        Dimension preferred_size = new Dimension(500/8, 500/8);
 
     }
 }
