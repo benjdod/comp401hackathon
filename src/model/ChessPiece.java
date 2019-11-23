@@ -1,6 +1,8 @@
 package model;
 
-import main.*;
+import main.ChessBoard;
+import main.Move;
+import main.Player;
 
 import java.util.ArrayList;
 
@@ -30,8 +32,8 @@ public abstract class ChessPiece {
     public abstract int getNumPoints();
     public abstract String getName(); // "King", "Queen", "Pawn", etc.
 
-    public String getPieceColor() {
-        return (_player.getColor() == Player.Color.WHITE) ? "white" : "black";
+    public Player.Color getPieceColor() {
+        return (_player.getColor() == Player.Color.WHITE) ? Player.Color.WHITE : Player.Color.BLACK;
     }
 
     public Player getPlayer() {

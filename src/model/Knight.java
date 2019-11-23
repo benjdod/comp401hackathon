@@ -31,7 +31,7 @@ public class Knight extends ChessPiece {
 
         ArrayList <Move> allPossibleMoves = new ArrayList<Move>();
 
-        for (ChessSpot s : _board.iterate()) {
+        for (ChessSpot s : _board) {
 
             boolean isKnightMove = false;
 
