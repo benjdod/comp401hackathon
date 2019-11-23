@@ -2,14 +2,16 @@ package model;
 
 import main.*;
 
+import java.util.ArrayList;
+
 public abstract class ChessPiece {
     protected int _x;
     protected int _y;
-    protected Player.Color _color;
+    protected Player _player;
     protected ChessBoard _board;
 
-    protected ChessPiece(ChessBoard b, Player.Color player, int xInit, int yInit) {
-        _color = (player == Player.Color.WHITE) ? Player.Color.WHITE : Player.Color.BLACK;
+    protected ChessPiece(ChessBoard b, Player player, int xInit, int yInit) {
+        _player = player;
         _x = xInit;
         _y = yInit;
         _board = b;
@@ -24,19 +26,15 @@ public abstract class ChessPiece {
     }
 
     public abstract boolean getCanMoveToPosition(int x, int y);
-    public abstract Move getAllPossibleMoves();
+    public abstract ArrayList<Move> getAllPossibleMoves();
     public abstract int getNumPoints();
     public abstract String getName(); // "King", "Queen", "Pawn", etc.
 
     public String getPieceColor() {
-        if (_color == Player.Color.WHITE) {
-            return "white";
-        } else {
-            return "black";
-        }
+        return (_player.getColor() == Player.Color.WHITE) ? "white" : "black";
     }
 
-    public Player.Color getPlayer() {
-        return _color;
+    public Player getPlayer() {
+        return _player;
     }
-  }
+}

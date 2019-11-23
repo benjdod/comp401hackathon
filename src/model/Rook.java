@@ -2,14 +2,21 @@ package model;
 
 import main.*;
 
+import java.util.ArrayList;
+
 public class Rook extends ChessPiece {
 
-    public Rook (Player.Color color, int startX, int startY) {
-        super(color, startX, startY);
+    public Rook (ChessBoard board, Player player, int startX, int startY) {
+        super(board, player, startX, startY);
     }
 
-    public boolean getCanMoveToPosition(ChessBoard b, int x, int y) {
+    public boolean getCanMoveToPosition(int x, int y) {
         return (this.getX() == x || this.getY() == y) ? true : false;
+    }
+
+    @Override
+    public ArrayList<Move> getAllPossibleMoves() {
+        return null; // TODO add this
     }
 
     public int getNumPoints() {

@@ -1,23 +1,31 @@
 package model;
 
 import main.ChessBoard;
+import main.Move;
 import main.Player;
+
+import java.util.ArrayList;
 
 public class Pawn extends ChessPiece {
 
-    public Pawn (ChessBoard board, Player.Color color, int startX, int startY) {
-        super(board, color, startX, startY);
+    public Pawn (ChessBoard board, Player player, int startX, int startY) {
+        super(board, player, startX, startY);
     }
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
-        if (this.getPlayer() == Player.Color.WHITE && y - this.getY() == 1 && x == this.getX()) {
+        if (getPlayer().getColor() == Player.Color.WHITE && y - this.getY() == 1 && x == this.getX()) {
             return true;
-        } else if (this.getPlayer() == Player.Color.BLACK && y - this.getY() == -1 && x == this.getX()) {
+        } else if (getPlayer().getColor() == Player.Color.BLACK && y - this.getY() == -1 && x == this.getX()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public ArrayList<Move> getAllPossibleMoves() {
+        return null; // TODO add this
     }
 
     @Override

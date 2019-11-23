@@ -1,16 +1,30 @@
 package model;
 
 import main.ChessBoard;
+import main.ChessSpot;
+import main.Move;
 import main.Player;
 
+import java.util.ArrayList;
+
 public class King extends ChessPiece {
-    public King (ChessBoard board, Player.Color color, int startX, int startY) {
-        super(board, color, startX, startY);
+    public King (ChessBoard board, Player player, int startX, int startY) {
+        super(board, player, startX, startY);
     }
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
-        return (Math.abs(this.getX() - x) <= 1 || Math.abs(this.getY() - y) <= 1) ? true : false;
+        if(Math.abs(this.getX() - x) <= 1 || Math.abs(this.getY() - y) <= 1) {
+            ChessSpot s = _board.getSpotAt(x, y);
+            return s.isEmpty() || !s.getPiece().getPlayer().getColor().equals(_player.getColor());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public ArrayList<Move> getAllPossibleMoves() {
+        return null; // FIXME write this
     }
 
     @Override

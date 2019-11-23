@@ -1,5 +1,6 @@
 package model;
 
+import main.ChessBoard;
 import main.ChessSpot;
 import main.Move;
 import main.Player;
@@ -8,22 +9,20 @@ import java.util.ArrayList;
 
 public class Knight extends ChessPiece {
 
-    public Knight (Player.Color color, int startX, int startY) {
-      super(color, startX, startY);
+    public Knight (ChessBoard board, Player player, int startX, int startY) {
+        super(board, player, startX, startY);
     }
 
     public boolean getCanMoveToPosition(int x, int y) {
-        ArrayList<Move> possibleMoves = getAllPossibleMoves(_board);
+        ArrayList<Move> possibleMoves = getAllPossibleMoves();
 
         Move moveCheck = new Move(this.getPlayer(), this.getX(), this.getY(), x, y);
 
         boolean isPossibleMove = false;
-        for(int i = 0; i < possibleMoves.size(); i++)
-        {
-          if(possibleMoves.get(i).equals(moveCheck))
-          {
-            isPossibleMove = true;
-          }
+        for(int i = 0; i < possibleMoves.size(); i++) {
+            if(possibleMoves.get(i).equals(moveCheck)) {
+                isPossibleMove = true;
+            }
         }
         return isPossibleMove;
     }
@@ -32,7 +31,7 @@ public class Knight extends ChessPiece {
 
         ArrayList <Move> allPossibleMoves = new ArrayList<Move>();
 
-        for(ChessSpot s : _board) {
+        for (ChessSpot s : _board) {
 
             boolean isKnightMove = false;
 
