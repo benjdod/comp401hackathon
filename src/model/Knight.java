@@ -19,7 +19,6 @@ public class Knight extends ChessPiece {
             isPossibleMove = true;
           }
         }
-
         return isPossibleMove;
     }
 
