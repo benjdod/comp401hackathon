@@ -14,8 +14,8 @@ public class Queen extends ChessPiece {
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
-        return (this.getSpotX() == x || this.getY() == y ||
-        this.getSpotX() + this.getY() == x + y || this.getY() - this.getSpotX() == y - x) ? true : false;
+        return (this.getX() == x || this.getY() == y ||
+        this.getX() + this.getY() == x + y || this.getY() - this.getX() == y - x) ? true : false;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Queen extends ChessPiece {
 
     public ArrayList<Move> getAllMovesInDirection(int dx, int dy) {
         ArrayList<Move> output = new ArrayList<Move>();
-        int cx = this.getSpotX();
+        int cx = this.getX();
         int cy = this.getY();
         for (int x = 0; x < 8; x++) {
             cx += dx;
@@ -46,11 +46,11 @@ public class Queen extends ChessPiece {
                 if(_board.getSpotAt(cx, cy).getPiece().getPlayer().getColor() == getPlayer().getColor()) {
                     break;
                 } else {
-                    output.add(new Move(_player, this.getSpotX(), this.getY(), cx, cy));
+                    output.add(new Move(_player, this.getX(), this.getY(), cx, cy));
                     break;
                 }
             } else {
-                output.add(new Move(_player, this.getSpotX(), this.getY(), cx, cy));
+                output.add(new Move(_player, this.getX(), this.getY(), cx, cy));
                 continue;
             }
         }

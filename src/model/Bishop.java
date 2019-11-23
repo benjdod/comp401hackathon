@@ -12,7 +12,7 @@ public class Bishop extends ChessPiece {
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
-        return (this.getSpotX() + this.getY() == x + y || this.getY() - this.getSpotX() == y - x) ? true : false;
+        return getX() + getY() == x + y || this.getY() - this.getX() == y - x;
     }
 
     @Override
@@ -25,36 +25,6 @@ public class Bishop extends ChessPiece {
         return possibleMoves;
     }
 
-<<<<<<< HEAD
-
-    public ArrayList<Move> getAllMovesInDirection(int dx, int dy) {
-        ArrayList<Move> output = new ArrayList<Move>();
-        int cx = this.getSpotX();
-        int cy = this.getY();
-        for (int x = 0; x < 8; x++) {
-            cx += dx;
-            cy += dy;
-            if(cx >= 8 || cy >= 8 || cx < 0 || cy < 0) {
-                break;
-            }
-            if(!_board.getSpotAt(cx, cy).isEmpty()) {
-                if(_board.getSpotAt(cx, cy).getPiece().getPlayer().getColor() == getPlayer().getColor()) {
-                    break;
-                } else {
-                    output.add(new Move(_player, this.getSpotX(), this.getY(), cx, cy));
-                    break;
-                }
-            } else {
-                output.add(new Move(_player, this.getSpotX(), this.getY(), cx, cy));
-                continue;
-            }
-      }
-
-      return output;
-    }
-
-=======
->>>>>>> fc9a420ff2450cd413499bc9e215344b358573a6
     @Override
     public int getNumPoints() {
         return 3;

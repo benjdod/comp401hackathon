@@ -16,7 +16,7 @@ public class Pawn extends ChessPiece {
     public boolean getCanMoveToPosition(int x, int y) {
         ArrayList<Move> possibleMoves = getAllPossibleMoves();
         for (Move m : possibleMoves) {
-            if (m.equals(new Move(this.getPlayer(), this.getSpotX(), this.getY(), x, y))) {
+            if (m.equals(new Move(this.getPlayer(), this.getX(), this.getY(), x, y))) {
                 return true;
             }
         }
@@ -26,7 +26,7 @@ public class Pawn extends ChessPiece {
     @Override
     public ArrayList<Move> getAllPossibleMoves() {
         ArrayList<Move> moves = new ArrayList<Move>();
-        int x = this.getSpotX();
+        int x = this.getX();
         int y = this.getY();
         if (this.getPlayer() == _board.getWhite()) {
             if (_board.getSpotAt(x, y + 1).isEmpty()) {
