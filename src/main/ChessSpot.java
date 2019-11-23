@@ -19,12 +19,13 @@ import model.ChessPiece;
 public class ChessSpot extends JPanel implements MouseListener {
 
     final public static Color SELECTABLE_COLOR = new Color(55/255f, 110/255f, 160/255f);
-    final public static Color SELECTED_COLOR = new Color(75/255f, 156/255f, 211/255f);
-    final public static Color HIGHLIGHT_COLOR = new Color(0.8f, 0.85f, 0.2f);
+    final public static Color SELECTED_COLOR = new Color(95/255f, 176/255f, 226/255f);
+    final public static Color MOVEABLE_COLOR = new Color(0.8f, 0.85f, 0.2f);
 
     private int _x, _y;
     private ChessBoard _board;
     private Color _bgcolor, _hcolor;
+    private Color _active_highlight;
     private boolean _is_highlighted;
     private boolean _has_piece;
     private ChessPiece _piece;
@@ -39,7 +40,7 @@ public class ChessSpot extends JPanel implements MouseListener {
         _y = y;
         _board = board;
         _bgcolor = spotcolor;
-        _hcolor = HIGHLIGHT_COLOR;
+        _hcolor = MOVEABLE_COLOR;
         _piece = null;
         
         setBackground(_bgcolor);
@@ -59,6 +60,26 @@ public class ChessSpot extends JPanel implements MouseListener {
 
     public int getSpotY() {
         return _y;
+    }
+
+    public void highlightSelectable() {
+        _active_highlight = SELECTABLE_COLOR;
+        trigger_update();
+    }
+
+    public void highlightSelected() {
+        _active_highlight = SELECTED_COLOR;
+        trigger_update();
+    }
+
+    public void highlightMoveable() {
+        _active_highlight = MOVEABLE_COLOR;
+        trigger_update();
+    }
+
+    public void unhighlight() {
+        _active_highlight = null;
+        trigger_update();
     }
 
     public boolean isHighlighted() {
@@ -101,8 +122,8 @@ public class ChessSpot extends JPanel implements MouseListener {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g.create();
-        if (_board.getSelected() == this) {
-            g2d.setColor(SELECTED_COLOR);
+        if (_active_highlight != null) {
+            g2d.setColor(_active_highlight);
             g2d.setStroke(new BasicStroke(4));
             g2d.drawRect(0, 0, getWidth(), getHeight());
         } else {

@@ -40,8 +40,8 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
             }
         }
 
-        h = new HumanPlayer(Player.Color.BLACK);
-        w = new HumanPlayer(Player.Color.WHITE);
+        h = new HumanPlayer(Player.Color.WHITE);
+        w = new HumanPlayer(Player.Color.BLACK);
 
         resetPieces();
     }
@@ -82,7 +82,7 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         return new ChessBoardIterator(this);
     }
 
-    // this should ONLY be run when strating a new game
+    // this should ONLY be run when starting a new game
     public void resetPieces() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
