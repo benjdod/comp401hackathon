@@ -41,6 +41,14 @@ public class ChessSpot extends JPanel implements MouseListener {
         addMouseListener(this);
     }
 
+    public int getSpotX() {
+        return _x;
+    }
+
+    public int getSpotY() {
+        return _y;
+    }
+
     public boolean isHighlighted() {
         return _is_highlighted;
     }
