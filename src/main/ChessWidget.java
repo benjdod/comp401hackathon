@@ -2,6 +2,7 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
 
@@ -14,6 +15,13 @@ public class ChessWidget extends JPanel implements ChessSpotListener {
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
         _board.addChessSpotListener(this);
+        Iterator<ChessSpot> i = _board.iterate(); 
+        int count = 0;
+        while(i.hasNext()) {
+            i.next();
+            count++;
+        }
+        System.out.println(count);
     }
 
     @Override
