@@ -65,7 +65,7 @@ public class AIPlayer implements Player {
 
         newBoard.applyMove(m);
         Move[] moves = allPossibleMovesFor(_board.getPlayerNot(this), newBoard);
-        int lowestScoreAfterM = 1000;
+        int lowestScoreAfterM = 10000;  // Every score is lower than this, so it will be replaced.
         for (Move move : moves) {
             ChessBoard temp = newBoard.clone();
             temp.applyMove(move);
