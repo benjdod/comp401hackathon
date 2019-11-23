@@ -94,6 +94,7 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 _spots[i][j].setPiece(null);
+                _spots[i][j].unhighlight();
             }
         }
 

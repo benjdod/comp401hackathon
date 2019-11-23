@@ -13,10 +13,12 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
 
     private ChessBoard _board;
     private Player turn;
+    private Player _h, _a;
 
     public ChessWidget() {
         HumanPlayer h = new HumanPlayer(Player.Color.WHITE);
         AIPlayer a = new AIPlayer(Player.Color.BLACK, _board);
+        _h = h; _a = a;
         turn = h;
         _board = new ChessBoard(h, a);
         setLayout(new BorderLayout());
@@ -80,6 +82,6 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
     @Override
     public void actionPerformed(ActionEvent e) {
         _board.resetPieces();
-
+        turn = _h;
     }
 }
