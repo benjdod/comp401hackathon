@@ -29,7 +29,7 @@ public class King extends ChessPiece {
 
     @Override
     public int getNumPoints() {
-      return 0;
+      return 1000;
     }
 
     @Override

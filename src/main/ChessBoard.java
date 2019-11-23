@@ -137,4 +137,12 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
     public Player getPlayerNot(Player p) {
         return (p.getColor() == Player.Color.WHITE) ? _black : _white;
     }
+
+    public Player getWhite() {
+        return _white;
+    }
+
+    public Player getBlack() {
+        return _black;
+    }
 }
