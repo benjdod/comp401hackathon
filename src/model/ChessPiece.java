@@ -19,11 +19,11 @@ public abstract class ChessPiece {
       }
     }
 
-    public abstract getX()
+    public int getX()
     {
       return x;
     }
-    public abstract getY()
+    public int getY()
     {
       return y;
     }
@@ -31,7 +31,7 @@ public abstract class ChessPiece {
     public abstract boolean getCanMoveToPosition(int x, int y);
     public abstract int getNumPoints();
     public abstract String getName(); // "King", "Queen", "Pawn", etc.
-    public abstract String getPieceColor()
+    public String getPieceColor()
     {
       if p == Player.WHITE()
       {
