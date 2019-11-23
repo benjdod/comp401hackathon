@@ -14,13 +14,12 @@ public class Pawn extends ChessPiece {
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
-        ArrayList<Move> possibleMoves = getAllPossibleMoves();
-        for (Move m : possibleMoves) {
-            if (m.equals(new Move(this.getPlayer(), this.getX(), this.getY(), x, y))) {
-                return true;
-            }
-        }
-        return false;
+        boolean distTwo = false;
+        boolean distOne = getAllPossibleMoves().get(0).getEndX() == x && getAllPossibleMoves().get(0).getEndY() == y;
+        try {
+            distTwo = getAllPossibleMoves().get(1).getEndX() == x && getAllPossibleMoves().get(1).getEndY() == y;
+        } catch (Exception e) {}
+        return distOne || distTwo;
     }
 
     @Override
@@ -28,38 +27,30 @@ public class Pawn extends ChessPiece {
         ArrayList<Move> moves = new ArrayList<Move>();
         int x = this.getX();
         int y = this.getY();
-        if (this.getPlayer() == _board.getWhite()) {
-            if (_board.getSpotAt(x, y + 1).isEmpty()) {
-                moves.add(new Move(_board.getWhite(), x, y, x, y + 1));
-            }
-            if (!_board.getSpotAt(x - 1, y + 1).isEmpty() &&
-                    _board.getSpotAt(x - 1, y + 1).getPiece().getPlayer().getColor() == Player.Color.BLACK) {
-                moves.add(new Move(_board.getWhite(), x, y, x - 1, y + 1));
-            }
-            if (!_board.getSpotAt(x + 1, y + 1).isEmpty() &&
-                    _board.getSpotAt(x + 1, y + 1).getPiece().getPlayer().getColor() == Player.Color.BLACK) {
-                moves.add(new Move(_board.getWhite(), x, y, x + 1, y + 1));
-            }
-            if (y == 1 && _board.getSpotAt(2, y).isEmpty() && _board.getSpotAt(3, y).isEmpty()) {
-                moves.add(new Move(_board.getWhite(), x, y, x, y + 2));
-            }
-        } else {
-            if (_board.getSpotAt(x, y - 1).isEmpty()) {
-                moves.add(new Move(_board.getBlack(), x, y, x, y - 1));
-            }
-            if (!_board.getSpotAt(x + 1, y - 1).isEmpty() &&
-                    _board.getSpotAt(x - 1, y + 1).getPiece().getPlayer().getColor() == Player.Color.WHITE) {
-                moves.add(new Move(_board.getBlack(), x, y, x + 1, y - 1));
-            }
-            if (!_board.getSpotAt(x + 1, y + 1).isEmpty() &&
-                    _board.getSpotAt(x + 1, y + 1).getPiece().getPlayer().getColor() == Player.Color.WHITE) {
-                moves.add(new Move(_board.getBlack(), x, y, x - 1, y - 1));
-            }
-            if (y == 6 && _board.getSpotAt(5, y).isEmpty() && _board.getSpotAt(4, y).isEmpty()) {
-                moves.add(new Move(_board.getBlack(), x, y, x, y - 2));
-            }
+        moves.add(new Move(getPlayer(), x, y, x, y+ ((getPlayer().getColor() == Player.Color.WHITE) ? 1 : -1)));
+        if (thisPawnIsInStartRow()) {
+            moves.add(new Move(getPlayer(), x, y, x, y+ ((getPlayer().getColor() == Player.Color.WHITE) ? 2 : -2)));
         }
         return moves;
+    }
+
+    public boolean thisPawnIsInStartRow()
+    {
+        if(getPlayer().getColor() == Player.Color.WHITE)
+        {
+            if(getY() == 1)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if(getY() == 6)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
