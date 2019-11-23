@@ -12,7 +12,7 @@ public class Bishop extends ChessPiece {
 
     @Override
     public boolean getCanMoveToPosition(int x, int y) {
-        return (this.getX() + this.getY() == x + y || this.getY() - this.getX() == y - x) ? true : false;
+        return (this.getSpotX() + this.getY() == x + y || this.getY() - this.getSpotX() == y - x) ? true : false;
     }
 
     @Override

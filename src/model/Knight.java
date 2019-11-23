@@ -16,7 +16,7 @@ public class Knight extends ChessPiece {
     public boolean getCanMoveToPosition(int x, int y) {
         ArrayList<Move> possibleMoves = getAllPossibleMoves();
 
-        Move moveCheck = new Move(this.getPlayer(), this.getX(), this.getY(), x, y);
+        Move moveCheck = new Move(this.getPlayer(), this.getSpotX(), this.getY(), x, y);
 
         boolean isPossibleMove = false;
         for(int i = 0; i < possibleMoves.size(); i++) {
@@ -41,7 +41,7 @@ public class Knight extends ChessPiece {
             }
 
             if (isKnightMove && s.isEmpty()) {
-                allPossibleMoves.add(new Move(this.getPlayer(), this.getX(), this.getY(), s.getSpotX(), s.getSpotY()));
+                allPossibleMoves.add(new Move(this.getPlayer(), this.getSpotX(), this.getY(), s.getSpotX(), s.getSpotY()));
             }
         }
 
