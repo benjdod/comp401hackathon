@@ -12,10 +12,12 @@ import javax.swing.JPanel;
 public class ChessWidget extends JPanel implements ChessSpotListener, ActionListener {
 
     private ChessBoard _board;
+    private Player turn;
 
     public ChessWidget() {
         HumanPlayer h = new HumanPlayer(Player.Color.WHITE);
         AIPlayer a = new AIPlayer(Player.Color.BLACK, _board);
+        turn = h;
         _board = new ChessBoard(h, a);
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
@@ -40,7 +42,7 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
             }
         } else {
             try {
-                if (_board.getSelected() == null && spot.getPiece().getPlayer().getColor() == h.getColor()) {
+                if (_board.getSelected() == null && spot.getPiece().getPlayer().getColor() == turn.getColor()) {
                     spot.highlightSelectable();
                 }
             } catch (NullPointerException e) {
@@ -67,6 +69,10 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
             _board.setSelected(spot);
             spot.highlightSelected();
         } else {
+            Move clickedMove = new Move(turn, _board.getSelected().getSpotX(),
+                    _board.getSelected().getSpotY(), spot.getSpotX(), spot.getSpotY());
+            turn = _board.getPlayerNot(turn);
+            _board.applyMove(clickedMove);
 
         }
 

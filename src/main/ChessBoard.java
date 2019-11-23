@@ -52,6 +52,8 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
     public void applyMove(Move move) {
         _spots[move.getEndX()][move.getEndY()].setPiece(_spots[move.getStartX()][move.getStartY()].getPiece());
         _spots[move.getStartX()][move.getStartY()].setPiece(null);
+        setSelected(null);
+
         // TODO add special cases like pawns slaughtering with hook thing
     }
 
