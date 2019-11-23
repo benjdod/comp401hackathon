@@ -31,12 +31,12 @@ public class Knight extends ChessPiece {
 
         ArrayList <Move> allPossibleMoves = new ArrayList<Move>();
 
-        for (ChessSpot s : _board.iterate()) {
+        for (ChessSpot s : _board) {
 
             boolean isKnightMove = false;
 
-            if ((Math.abs(this.getX() - _x) == 2 && Math.abs(this.getY() - _y) == 1)
-                  || (Math.abs(this.getX() - _x) == 1 && Math.abs(this.getY() - _y) == 2)) {
+            if (((Math.abs(this.getX() - s.getSpotXCoord()) == 2) && ((Math.abs(this.getY() - getSpotYCoord())) == 1))
+                  || ((Math.abs(this.getX() - s.getSpotXCoord()) == 1) && (Math.abs(this.getY() - s.getSpotYCoord()) == 2))) {
                 isKnightMove = true;
             }
 

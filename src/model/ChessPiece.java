@@ -1,6 +1,9 @@
 package model;
 
-import main.*;
+import main.ChessBoard;
+import main.ChessSpot;
+import main.Move;
+import main.Player;
 
 import java.util.ArrayList;
 
@@ -30,11 +33,44 @@ public abstract class ChessPiece {
     public abstract int getNumPoints();
     public abstract String getName(); // "King", "Queen", "Pawn", etc.
 
-    public String getPieceColor() {
-        return (_player.getColor() == Player.Color.WHITE) ? "white" : "black";
+    public Player.Color getPieceColor() {
+        return (_player.getColor() == Player.Color.WHITE) ? Player.Color.WHITE : Player.Color.BLACK;
     }
 
     public Player getPlayer() {
         return _player;
+    }
+
+    public ArrayList<Move> getLineMovesInDirection(int dx, int dy) {
+        ArrayList<Move> output = new ArrayList<Move>();
+        int currentX = this.getX();
+        int currentY = this.getY();
+
+        for (int x = 0; x < 8; x++) {
+            currentX += dx;
+            currentY += dy;
+            if (currentX > 7 || currentY > 7 || currentX < 0 || currentY < 0) {
+                break;
+            }
+
+            Move thisMove = new Move(getPlayer(), this.getX(), this.getY(), currentX, currentY);
+            ChessSpot thisSpot = _board.getSpotAt(currentX, currentY);
+            Player.Color thisColor = thisSpot.getPiece().getPieceColor();
+            // This runs for each spot in a row going away from the start position.
+
+            if (thisSpot.isEmpty()) {
+                output.add(thisMove);
+                continue;
+            }
+
+            if (thisColor == getPlayer().getColor()) {
+                break;
+            }
+
+            // If this runs, the color of this spot is the opposite of our color.
+            output.add(thisMove);
+            break;
+        }
+        return output;
     }
 }

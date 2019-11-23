@@ -32,7 +32,7 @@ public class ChessSpot extends JPanel implements MouseListener {
     private String _iconfilepath;
     private JLabel _icon;
 
-    private ArrayList<ChessSpotListener> _listeners = new ArrayList<ChessSpotListener>();
+    private ArrayList<ChessSpotListener> _listeners = new ArrayList<>();
 
     public ChessSpot(int x, int y, ChessBoard board, Color spotcolor) {
         // don't need input validation
@@ -194,5 +194,13 @@ public class ChessSpot extends JPanel implements MouseListener {
 
     public ChessSpot clone(ChessBoard newBoard) {
         return new ChessSpot(_x, _y, newBoard, _bgcolor);
+    }
+
+    public int getSpotXCoord() {
+        return (getSpotX()+10) / getWidth();
+    }
+
+    public int getSpotYCoord() {
+        return (getSpotY()+10) / getHeight();
     }
 }

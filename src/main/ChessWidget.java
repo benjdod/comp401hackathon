@@ -17,8 +17,14 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
     Player ai = new AIPlayer(Player.Color.BLACK, _board);
 
     public ChessWidget() {
+<<<<<<< HEAD
 
         _board = new ChessBoard(h,ai);
+=======
+        HumanPlayer h = new HumanPlayer(Player.Color.WHITE);
+        AIPlayer a = new AIPlayer(Player.Color.BLACK, _board);
+        _board = new ChessBoard(h, a);
+>>>>>>> fc9a420ff2450cd413499bc9e215344b358573a6
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
         _board.addChessSpotListener(this);
@@ -35,16 +41,18 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
     @Override
     public void spotEntered(ChessSpot spot) {
         if (_board.getSelected() != null) {
-            return;
+            // Check if this spot is a valid move from the selected spot.
+            if (_board.getSelected().getPiece().getCanMoveToPosition(spot.getSpotXCoord(), spot.getSpotYCoord())) {
+                System.out.println("Can move to " + spot.getX() + ", " + spot.getY());
+                spot.highlightSelectable();
+                // This means that the spot is valid for moving to.
+            }
         }
         try {
             if (spot.getPiece().getPlayer().getColor() == h.getColor()) {
                 spot.highlightSelectable();
             }
-        } catch (NullPointerException e) {
-
-        }
-
+        } catch (NullPointerException e) {}
     }
 
     @Override
