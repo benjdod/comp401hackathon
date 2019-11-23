@@ -14,6 +14,7 @@ public class Knight extends ChessPiece {
     }
 
     public boolean getCanMoveToPosition(int x, int y) {
+
         ArrayList<Move> possibleMoves = getAllPossibleMoves();
 
         Move moveCheck = new Move(this.getPlayer(), this.getX(), this.getY(), x, y);

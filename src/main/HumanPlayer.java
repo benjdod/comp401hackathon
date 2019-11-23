@@ -8,11 +8,6 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public Move getNextMove(ChessBoard board) {
-        return null; // TODO add user asking functionality through board.
-    }
-
-    @Override
     public Color getColor() {
         return _color;
     }
