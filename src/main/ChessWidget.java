@@ -35,12 +35,9 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
 
     @Override
     public void spotEntered(ChessSpot spot) {
-        if (_board.getSelected())
         if (_board.getSelected() != null) {
-            System.out.println("A Spot is Selected");
             // Check if this spot is a valid move from the selected spot.
-            if (_board.getSelected().getPiece().getCanMoveToPosition(spot.getSpotXCoord(), spot.getSpotYCoord())) {
-                System.out.println("Can move to " + spot.getSpotX() + ", " + spot.getSpotY());
+            if (_board.getSelected().getPiece().getCanMoveToPosition(spot.getSpotX(), spot.getSpotY())) {
                 spot.highlightSelectable();
                 // This means that the spot is valid for moving to.
             }
