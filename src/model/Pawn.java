@@ -40,7 +40,7 @@ public class Pawn extends ChessPiece {
                     _board.getSpotAt(x + 1, y + 1).getPiece().getPlayer().getColor() == Player.Color.BLACK) {
                 moves.add(new Move(_board.getWhite(), x, y, x + 1, y + 1));
             }
-            if (y == 1 && _board.getSpotAt(x, 2).isEmpty() && _board.getSpotAt(x, 3).isEmpty()) {
+            if (y == 1 && _board.getSpotAt(2, y).isEmpty() && _board.getSpotAt(3, y).isEmpty()) {
                 moves.add(new Move(_board.getWhite(), x, y, x, y + 2));
             }
         } else {
@@ -55,7 +55,7 @@ public class Pawn extends ChessPiece {
                     _board.getSpotAt(x + 1, y + 1).getPiece().getPlayer().getColor() == Player.Color.WHITE) {
                 moves.add(new Move(_board.getBlack(), x, y, x - 1, y - 1));
             }
-            if (y == 6 && _board.getSpotAt(x, 5).isEmpty() && _board.getSpotAt(x, 4).isEmpty()) {
+            if (y == 6 && _board.getSpotAt(5, y).isEmpty() && _board.getSpotAt(4, y).isEmpty()) {
                 moves.add(new Move(_board.getBlack(), x, y, x, y - 2));
             }
         }
