@@ -15,19 +15,9 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
     private ChessSpot _selected;
     private Player _black, _white;
 
-<<<<<<< HEAD
-    private ChessBoard(ChessSpot[][] spots, Player white, Player black) {
-        _spots = spots;
-=======
-    // temporary human players
-    HumanPlayer h;
-    HumanPlayer w;
-
-
     private ChessBoard(ChessSpot[][] spots, Player white, Player black) {
         _spots = spots;
 
->>>>>>> fc9a420ff2450cd413499bc9e215344b358573a6
         _selected = null;
         _black = black;
         _white = white;
@@ -105,7 +95,6 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
             }
         }
 
-<<<<<<< HEAD
         _spots[0][0].setPiece(new Rook(this,_white,0,0));
         _spots[1][0].setPiece(new Knight(this,_white,1,0));
         _spots[2][0].setPiece(new Bishop(this,_white,2,0));
@@ -141,48 +130,8 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         _spots[5][6].setPiece(new Pawn(this,_black,5,6));
         _spots[6][6].setPiece(new Pawn(this,_black,6,6));
         _spots[7][6].setPiece(new Pawn(this,_black,7,6));
-
-    }
-    
-=======
-        _spots[0][0].setPiece(new Rook(this, h, 0, 0));
-        _spots[1][0].setPiece(new Knight(this, h, 1, 0));
-        _spots[2][0].setPiece(new Bishop(this, h, 2, 0));
-        _spots[3][0].setPiece(new Queen(this, h, 3, 0));
-        _spots[4][0].setPiece(new King(this, h, 4, 0));
-        _spots[5][0].setPiece(new Bishop(this, h, 5, 0));
-        _spots[6][0].setPiece(new Knight(this, h, 6, 0));
-        _spots[7][0].setPiece(new Rook(this, h, 7, 0));
-
-        _spots[0][1].setPiece(new Pawn(this, h, 0, 1));
-        _spots[1][1].setPiece(new Pawn(this, h, 1, 1));
-        _spots[2][1].setPiece(new Pawn(this, h, 2, 1));
-        _spots[3][1].setPiece(new Pawn(this, h, 3, 1));
-        _spots[4][1].setPiece(new Pawn(this, h, 4, 1));
-        _spots[5][1].setPiece(new Pawn(this, h, 5, 1));
-        _spots[6][1].setPiece(new Pawn(this, h, 6, 1));
-        _spots[7][1].setPiece(new Pawn(this, h, 7, 1));
-
-        _spots[0][7].setPiece(new Rook(this, w, 0, 7));
-        _spots[1][7].setPiece(new Knight(this, w, 1, 7));
-        _spots[2][7].setPiece(new Bishop(this, w, 2, 7));
-        _spots[3][7].setPiece(new King(this, w, 3, 7));
-        _spots[4][7].setPiece(new Queen(this, w, 4, 7));
-        _spots[5][7].setPiece(new Bishop(this, w, 5, 7));
-        _spots[6][7].setPiece(new Knight(this, w, 6, 7));
-        _spots[7][7].setPiece(new Rook(this, w, 7, 7));
-
-        _spots[0][6].setPiece(new Pawn(this, w, 0, 6));
-        _spots[1][6].setPiece(new Pawn(this, w, 1, 6));
-        _spots[2][6].setPiece(new Pawn(this, w, 2, 6));
-        _spots[3][6].setPiece(new Pawn(this, w, 3, 6));
-        _spots[4][6].setPiece(new Pawn(this, w, 4, 6));
-        _spots[5][6].setPiece(new Pawn(this, w, 5, 6));
-        _spots[6][6].setPiece(new Pawn(this, w, 6, 6));
-        _spots[7][6].setPiece(new Pawn(this, w, 7, 6));
     }
 
->>>>>>> fc9a420ff2450cd413499bc9e215344b358573a6
     public ChessBoard clone() {
         ChessSpot[][] newSpots = new ChessSpot[_spots.length][_spots[0].length];
         ChessBoard output = new ChessBoard(newSpots, getWhite(), getBlack());
