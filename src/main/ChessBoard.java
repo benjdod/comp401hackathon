@@ -34,6 +34,10 @@ public class ChessBoard extends JPanel {
         }
     }
 
+    public ChessSpot getSpotAt(int x, int y) {
+        return _spots[x][y];
+    }
+
     public void addChessSpotListener(ChessSpotListener c) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
