@@ -156,4 +156,8 @@ public class ChessSpot extends JPanel implements MouseListener {
             c.spotExited(this);
         }
     }
+
+    public ChessSpot clone(ChessBoard newBoard) {
+        return new ChessSpot(_x, _y, newBoard, _bgcolor);
+    }
 }

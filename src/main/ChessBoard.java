@@ -10,15 +10,20 @@ import java.awt.Dimension;
 public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
 
     private ChessSpot[][] _spots;
-    private ChessSpot _selected; 
+    private ChessSpot _selected;
+    private Player _black, _white;
 
-    public ChessBoard() {
-        _spots = new ChessSpot[8][8];
+    private ChessBoard(ChessSpot[][] spots, Player white, Player black) {
+        _spots = spots;
         _selected = null;
+        _black = black;
+        _white = white;
 
         setLayout(new GridLayout(8,8));
+    }
 
-        Dimension preferred_size = new Dimension(75, 75);
+    public ChessBoard(Player white, Player black) {
+        this(new ChessSpot[8][8], white, black);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -29,7 +34,7 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
                     setcolor = new Color(0.87f,0.62f,0.53f);
                 }
                 _spots[i][j] = new ChessSpot(i,j,this,setcolor);
-                _spots[i][j].setPreferredSize(preferred_size);
+                _spots[i][j].setPreferredSize(new Dimension(75, 75));
                 add(_spots[i][j]);
             }
         }
@@ -69,5 +74,20 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
     @Override
     public Iterator<ChessSpot> iterator() {
         return new ChessBoardIterator(this);
+    }
+
+    public ChessBoard clone() {
+        ChessSpot[][] newSpots = new ChessSpot[_spots.length][_spots[0].length];
+        ChessBoard output = new ChessBoard(newSpots, );
+        for (int i = 0; i < newSpots.length; i++) {
+            for (int j = 0; j < newSpots[0].length; j++) {
+                newSpots[i][j] = _spots[i][j].clone(output);
+            }
+        }
+        return output;
+    }
+
+    public Player getPlayerNot(Player p) {
+        return (p.getColor() == Player.Color.WHITE) ? _black : _white;
     }
 }

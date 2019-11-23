@@ -23,7 +23,7 @@ public class AIPlayer implements Player {
          * This will involve a ton of virtual chessboards
          */
         Move best = null;
-        for (Move m : movesThisBotCouldMake()) {
+        for (Move m : allPossibleMovesFor(this, _board)) {
             if (best == null || getWorstCaseAfter(best) < getWorstCaseAfter(m)) {
                 best = m;
             }
@@ -37,10 +37,10 @@ public class AIPlayer implements Player {
         return _color;
     }
 
-    private Move[] movesThisBotCouldMake() {
+    private Move[] allPossibleMovesFor(Player p, ChessBoard b) {
         ArrayList<Move> output = new ArrayList<>();
-        for (ChessSpot spot : _board) {
-            if (spot.isEmpty() || spot.getPiece().getPlayer().getColor() != getColor()) {
+        for (ChessSpot spot : b) {
+            if (spot.isEmpty() || spot.getPiece().getPlayer().getColor() != p.getColor()) {
                 continue;
             }
 
@@ -55,6 +55,9 @@ public class AIPlayer implements Player {
     }
 
     private int getWorstCaseAfter(Move m) {
-
+        ChessBoard newBoard = _board.clone();
+        newBoard.applyMove(m);
+        Move[] moves = allPossibleMovesFor(_board.getPlayerNot(this), newBoard);
+        for ()
     }
 }
