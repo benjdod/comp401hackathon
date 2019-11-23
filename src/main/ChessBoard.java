@@ -55,7 +55,10 @@ public class ChessBoard extends JPanel {
     }
 
     public void setSelected(ChessSpot s) {
+        ChessSpot old_selection = _selected;
         _selected = s;
+        try {s.selectSpot();} catch (NullPointerException e) {}
+        try {old_selection.deselectSpot();} catch (NullPointerException e) {}
     }
 
 }
