@@ -12,19 +12,29 @@ import java.awt.Dimension;
 public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
 
     private ChessSpot[][] _spots;
-    private ChessSpot _selected; 
+    private ChessSpot _selected;
+    private Player _black, _white;
 
+<<<<<<< HEAD
     // temporary human players
     HumanPlayer h;
     HumanPlayer w;
 
     public ChessBoard() {
         _spots = new ChessSpot[8][8];
+=======
+    private ChessBoard(ChessSpot[][] spots, Player white, Player black) {
+        _spots = spots;
+>>>>>>> 6d6f62a5200c49f116c9a76228b78f2deeecdf72
         _selected = null;
+        _black = black;
+        _white = white;
 
         setLayout(new GridLayout(8,8));
+    }
 
-        Dimension preferred_size = new Dimension(75, 75);
+    public ChessBoard(Player white, Player black) {
+        this(new ChessSpot[8][8], white, black);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -35,7 +45,7 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
                     setcolor = new Color(0.87f,0.62f,0.53f);
                 }
                 _spots[i][j] = new ChessSpot(i,j,this,setcolor);
-                _spots[i][j].setPreferredSize(preferred_size);
+                _spots[i][j].setPreferredSize(new Dimension(75, 75));
                 add(_spots[i][j]);
             }
         }
@@ -48,6 +58,12 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
 
     public ChessSpot getSpotAt(int x, int y) {
         return _spots[x][y];
+    }
+
+    public void applyMove(Move move) {
+        _spots[move.getEndX()][move.getEndY()].setPiece(_spots[move.getStartX()][move.getStartY()].getPiece());
+        _spots[move.getStartX()][move.getStartY()].setPiece(null);
+        // TODO add special cases like pawns slaughtering with hook thing
     }
 
     public void addChessSpotListener(ChessSpotListener c) {
@@ -82,6 +98,7 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         return new ChessBoardIterator(this);
     }
 
+<<<<<<< HEAD
     // this should ONLY be run when starting a new game
     public void resetPieces() {
         for (int i = 0; i < 8; i++) {
@@ -125,5 +142,28 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         _spots[5][6].setPiece(new Pawn(this,w,5,6));
         _spots[6][6].setPiece(new Pawn(this,w,6,6));
         _spots[7][6].setPiece(new Pawn(this,w,7,6));
+=======
+    public ChessBoard clone() {
+        ChessSpot[][] newSpots = new ChessSpot[_spots.length][_spots[0].length];
+        ChessBoard output = new ChessBoard(newSpots, getWhite(), getBlack());
+        for (int i = 0; i < newSpots.length; i++) {
+            for (int j = 0; j < newSpots[0].length; j++) {
+                newSpots[i][j] = _spots[i][j].clone(output);
+            }
+        }
+        return output;
+    }
+
+    public Player getPlayerNot(Player p) {
+        return (p.getColor() == Player.Color.WHITE) ? _black : _white;
+    }
+
+    public Player getWhite() {
+        return _white;
+    }
+
+    public Player getBlack() {
+        return _black;
+>>>>>>> 6d6f62a5200c49f116c9a76228b78f2deeecdf72
     }
 }
