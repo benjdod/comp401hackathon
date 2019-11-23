@@ -9,9 +9,11 @@ import java.awt.Dimension;
 public class ChessBoard extends JPanel {
 
     private ChessSpot[][] _spots;
+    private ChessSpot _selected; 
 
     public ChessBoard() {
         _spots = new ChessSpot[8][8];
+        _selected = null;
 
         setLayout(new GridLayout(8,8));
 
@@ -30,6 +32,30 @@ public class ChessBoard extends JPanel {
                 add(_spots[i][j]);
             }
         }
+    }
+
+    public void addChessSpotListener(ChessSpotListener c) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                _spots[i][j].addChessSpotListener(c);
+            }
+        }
+    }
+
+    public void removeChessSpotListener(ChessSpotListener c) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                _spots[i][j].removeChessSpotListener(c);
+            }
+        }
+    }
+
+    public ChessSpot getSelected() {
+        return _selected;
+    }
+
+    public void setSelected(ChessSpot s) {
+        _selected = s;
     }
 
 }
