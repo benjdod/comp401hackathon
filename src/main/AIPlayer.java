@@ -14,31 +14,48 @@ public class AIPlayer implements Player {
         _board = board;
     }
 
-    public Move getRandomMoveFrom(int x, int y) {
-      ArrayList<Move> eligibleMoves = new ArrayList<>();
+    @Override
+    public Move getNextMove(ChessBoard board) {
+        /* This method holds the AI behind this player.
+         * Basic idea: evaluate EVERY possible move that this bot
+         *   could make, and then choose the one that is sure to
+         *   result in largest point advantage for the bot.
+         * This will involve a ton of virtual chessboards
+         */
+        Move best = null;
+        for (Move m : movesThisBotCouldMake(_board)) {
+            if (best == null || getWorstCaseAfter(best) < getWorstCaseAfter(m)) {
+                best = m;
+            }
+        }
 
-      for (ChessSpot s : _board) {
-          if (s.getPiece() != null && s.getPiece().getPlayer().getColor().equals(_color)) {
-              ChessPiece p = s.getPiece();
-              if (p.getCanMoveToPosition(x, y)) {
-                  eligibleMoves.add(new Move(this, s.getPiece().getX(), s.getPiece().getY(), x, y));
-              }
-          }
-      }
-
-        Random r = new Random();
-        int moveToSelect = r.nextInt(eligibleMoves.size()-1);
-
-        return (eligibleMoves.size() > 0) ? eligibleMoves.get(moveToSelect) : null;
+        return best;
     }
 
-      @Override
-      public Move getNextMove(ChessBoard board) {
-            return null; // FIXME make this smarter
-      }
+    @Override
+    public Color getColor() {
+        return _color;
+    }
 
-      @Override
-      public Color getColor() {
-            return _color;
-      }
+
+
+
+//    public Move getRandomMoveFrom(int x, int y) {
+//      ArrayList<Move> eligibleMoves = new ArrayList<>();
+//
+//      for (ChessSpot s : _board) {
+//          if (s.getPiece() != null && s.getPiece().getPlayer().getColor().equals(_color)) {
+//              ChessPiece p = s.getPiece();
+//              if (p.getCanMoveToPosition(x, y)) {
+//                  eligibleMoves.add(new Move(this, s.getPiece().getX(), s.getPiece().getY(), x, y));
+//              }
+//          }
+//      }
+//
+//        Random r = new Random();
+//        int moveToSelect = r.nextInt(eligibleMoves.size()-1);
+//
+//        return (eligibleMoves.size() > 0) ? eligibleMoves.get(moveToSelect) : null;
+//    }
+
 }
