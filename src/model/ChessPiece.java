@@ -3,10 +3,10 @@ package model;
 import main.*;
 
 public abstract class ChessPiece {
-    private int _x;
-    private int _y;
-    private Player.Color _color;
-    private ChessBoard _board;
+    protected int _x;
+    protected int _y;
+    protected Player.Color _color;
+    protected ChessBoard _board;
 
     protected ChessPiece(ChessBoard b, Player.Color player, int xInit, int yInit) {
         _color = (player == Player.Color.WHITE) ? Player.Color.WHITE : Player.Color.BLACK;
@@ -24,6 +24,7 @@ public abstract class ChessPiece {
     }
 
     public abstract boolean getCanMoveToPosition(int x, int y);
+    public abstract Move getAllPossibleMoves();
     public abstract int getNumPoints();
     public abstract String getName(); // "King", "Queen", "Pawn", etc.
 
