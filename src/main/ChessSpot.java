@@ -44,7 +44,7 @@ public class ChessSpot extends JPanel implements MouseListener {
         // FOR HANDLING IMAGES
 
         setLayout(new BorderLayout());
-        JLabel image = new JLabel(new ImageIcon("img/testdimension100.png"));
+        JLabel image = new JLabel(new ImageIcon("img/testdim75.png"));
         add(image,BorderLayout.CENTER);
 
         addMouseListener(this);

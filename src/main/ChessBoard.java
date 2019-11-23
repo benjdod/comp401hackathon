@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.Iterator;
 import java.awt.Dimension;
 
 public class ChessBoard extends JPanel {
@@ -17,7 +18,7 @@ public class ChessBoard extends JPanel {
 
         setLayout(new GridLayout(8,8));
 
-        Dimension preferred_size = new Dimension(500/8, 500/8);
+        Dimension preferred_size = new Dimension(75, 75);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -65,4 +66,7 @@ public class ChessBoard extends JPanel {
         try {old_selection.deselectSpot();} catch (NullPointerException e) {}
     }
 
+    public Iterator<ChessSpot> iterate() {
+        return new ChessBoardIterator(this);
+    }
 }

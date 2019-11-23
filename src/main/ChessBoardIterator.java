@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ChessBoardIterator implements Iterator<ChessSpot> {
 
@@ -24,7 +25,7 @@ public class ChessBoardIterator implements Iterator<ChessSpot> {
 		if (!hasNext()) {
 			throw new NoSuchElementException();
 		}
-		Spot s = _board.getSpotAt(_x, _y);
+		ChessSpot s = _board.getSpotAt(_x, _y);
 		if (_x < 7) {
 			_x++;
 		} else {
