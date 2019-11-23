@@ -22,7 +22,7 @@ public class AIPlayer implements Player {
         {
           if(p.getCanMoveToPosition(x, y))
           {
-            eligibleMoves.add(new Move(this, s.getPiece().getX(), s.getPiece().getY(), x, y;
+            eligibleMoves.add(new Move(this, s.getPiece().getX(), s.getPiece().getY(), x, y));
           }
         }
       }
