@@ -15,7 +15,7 @@ public class ChessWidget extends JPanel implements ChessSpotListener {
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
         _board.addChessSpotListener(this);
-        Iterator<ChessSpot> i = _board.iterate(); 
+        Iterator<ChessSpot> i = _board.iterator();
         int count = 0;
         while(i.hasNext()) {
             i.next();
