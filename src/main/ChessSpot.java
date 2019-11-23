@@ -18,7 +18,8 @@ import model.ChessPiece;
 
 public class ChessSpot extends JPanel implements MouseListener {
 
-    final public static Color SELECTED_COLOR = new Color(0.8f, 0.1f, 0.4f);
+    final public static Color SELECTABLE_COLOR = new Color(55/255f, 110/255f, 160/255f);
+    final public static Color SELECTED_COLOR = new Color(75/255f, 156/255f, 211/255f);
     final public static Color HIGHLIGHT_COLOR = new Color(0.8f, 0.85f, 0.2f);
 
     private int _x, _y;
@@ -73,11 +74,18 @@ public class ChessSpot extends JPanel implements MouseListener {
     }
 
     public void setPiece(ChessPiece piece) {
-        _piece = piece;
-        String filepath = "img/"+_piece.getPlayer().getColor().name().toLowerCase()+_piece.getName().toLowerCase()+".png";
-        System.out.println(filepath);
-        _icon.setIcon(new ImageIcon(filepath));
-        trigger_update();
+        if (piece != null) {
+            _piece = piece;
+            String filepath = "img/"+_piece.getPlayer().getColor().name().toLowerCase()+_piece.getName().toLowerCase()+".png";
+            System.out.println(filepath);
+            _icon.setIcon(new ImageIcon(filepath));
+            trigger_update();
+        } else {
+            _piece = null;
+            _icon.setIcon(new ImageIcon("img/transparent"));
+            trigger_update();
+        }
+        
     }
 
     public void selectSpot() {

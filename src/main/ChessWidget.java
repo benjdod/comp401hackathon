@@ -10,14 +10,14 @@ public class ChessWidget extends JPanel implements ChessSpotListener {
 
     private ChessBoard _board;
 
+    Player h = new HumanPlayer(Player.Color.WHITE);
+    Player ai = new HumanPlayer(Player.Color.BLACK);
+
     public ChessWidget() {
         _board = new ChessBoard();
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
         _board.addChessSpotListener(this);
-<<<<<<< HEAD
-        
-=======
         Iterator<ChessSpot> i = _board.iterator();
         int count = 0;
         while(i.hasNext()) {
@@ -25,7 +25,6 @@ public class ChessWidget extends JPanel implements ChessSpotListener {
             count++;
         }
         System.out.println(count);
->>>>>>> 1d618ec19c7f11aa9b0d7567ca7f24f253dbabc5
     }
 
     @Override
@@ -42,8 +41,9 @@ public class ChessWidget extends JPanel implements ChessSpotListener {
 
     @Override
     public void spotEntered(ChessSpot spot) {
-        // TODO Auto-generated method stub
-
+        if (spot.getPiece().getPlayer().getColor() == h.getColor()) {
+            spot.
+        }
     }
 
     @Override
