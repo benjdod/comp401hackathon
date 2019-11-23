@@ -1,6 +1,7 @@
 package model;
 
 import main.ChessBoard;
+import main.Move;
 import main.Player;
 
 public class Queen extends ChessPiece {
@@ -13,6 +14,11 @@ public class Queen extends ChessPiece {
     public boolean getCanMoveToPosition(int x, int y) {
         return (this.getX() == x || this.getY() == y ||
         this.getX() + this.getY() == x + y || this.getY() - this.getX() == y - x) ? true : false;
+    }
+
+    @Override
+    public Move getAllPossibleMoves() {
+        return null; // TODO add this
     }
 
     @Override
