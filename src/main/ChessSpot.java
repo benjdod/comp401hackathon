@@ -160,15 +160,14 @@ public class ChessSpot extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        for (ChessSpotListener c : _listeners) {
-            c.spotClicked(this);
-        }
 
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
+        for (ChessSpotListener c : _listeners) {
+            c.spotClicked(this);
+        }
 
     }
 

@@ -9,13 +9,15 @@ public class AIPlayer implements Player {
     private Player.Color _color;
     private ChessBoard _board;
 
-    public AIPlayer(Color color, ChessBoard board) {
+    public AIPlayer(Color color) {
         _color = color;
+    }
+
+    public void setBoard(ChessBoard board) {
         _board = board;
     }
 
-    @Override
-    public Move getNextMove(ChessBoard board) {
+    public Move getNextMove() {
         /* This method holds the AI behind this player.
          * Basic idea: evaluate EVERY possible move that this bot
          *   could make, and then choose the one that is sure to
@@ -39,6 +41,9 @@ public class AIPlayer implements Player {
 
     private Move[] allPossibleMovesFor(Player p, ChessBoard b) {
         ArrayList<Move> output = new ArrayList<>();
+        if (b == null) {
+            System.out.println("NULL");
+        }
         for (ChessSpot spot : b) {
             if (spot.isEmpty() || spot.getPiece().getPlayer().getColor() != p.getColor()) {
                 continue;

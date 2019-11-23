@@ -17,10 +17,11 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
 
     public ChessWidget() {
         HumanPlayer h = new HumanPlayer(Player.Color.WHITE);
-        AIPlayer a = new AIPlayer(Player.Color.BLACK, _board);
+        HumanPlayer a = new HumanPlayer(Player.Color.BLACK);
         _h = h; _a = a;
         turn = h;
         _board = new ChessBoard(h, a);
+//        a.setBoard(_board);
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
         _board.addChessSpotListener(this);
@@ -67,14 +68,21 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
         if (_board.getSelected() == spot) {
             _board.setSelected(null);
             spot.unhighlight();
-        } else if (_board.getSelected() == null) {
+        } else if (_board.getSelected() == null && spot.getPiece().getPlayer().equals(turn)) {
             _board.setSelected(spot);
             spot.highlightSelected();
         } else {
-            Move clickedMove = new Move(turn, _board.getSelected().getSpotX(),
-                    _board.getSelected().getSpotY(), spot.getSpotX(), spot.getSpotY());
-            turn = _board.getPlayerNot(turn);
-            _board.applyMove(clickedMove);
+            if (_board.getSelected() != null &&
+                    _board.getSelected().getPiece().getCanMoveToPosition(spot.getSpotX(), spot.getSpotY())) {
+                Move clickedMove = new Move(turn, _board.getSelected().getSpotX(),
+                        _board.getSelected().getSpotY(), spot.getSpotX(), spot.getSpotY());
+                turn = _board.getPlayerNot(turn);
+                _board.applyMove(clickedMove);
+                for (ChessSpot s : _board) {
+                    s.unhighlight();
+                }
+                testForAI();
+            }
         }
 
     }
@@ -83,5 +91,12 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
     public void actionPerformed(ActionEvent e) {
         _board.resetPieces();
         turn = _h;
+    }
+
+    private void testForAI() {
+//        if (turn.equals(_board.getBlack())) {
+//            _board.applyMove(((AIPlayer) _board.getBlack()).getNextMove());
+//            turn = _board.getPlayerNot(turn);
+//        } fixme later
     }
 }
