@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class ChessWidget extends JPanel {
 
     private ChessBoard _board;
-    private enum Player {BLACK, WHITE};
+  
 
     public ChessWidget() {
         _board = new ChessBoard();

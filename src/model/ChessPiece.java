@@ -5,6 +5,8 @@ public abstract class ChessPiece {
     private int y;
     private Player p;
 
+    private enum Player {BLACK, WHITE};
+
     private ChessPiece(Player player)
     {
       if (player == Player.WHITE)
@@ -15,6 +17,15 @@ public abstract class ChessPiece {
       {
         p = Player.BLACK;
       }
+    }
+
+    public abstract getX()
+    {
+      return x;
+    }
+    public abstract getY()
+    {
+      return y;
     }
 
     public abstract boolean getCanMoveToPosition(int x, int y);
