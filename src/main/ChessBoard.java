@@ -2,6 +2,8 @@ package main;
 
 import javax.swing.JPanel;
 
+import model.*;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Iterator;
@@ -10,15 +12,20 @@ import java.awt.Dimension;
 public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
 
     private ChessSpot[][] _spots;
-    private ChessSpot _selected; 
+    private ChessSpot _selected;
+    private Player _black, _white;
 
-    public ChessBoard() {
-        _spots = new ChessSpot[8][8];
+    private ChessBoard(ChessSpot[][] spots, Player white, Player black) {
+        _spots = spots;
         _selected = null;
+        _black = black;
+        _white = white;
 
         setLayout(new GridLayout(8,8));
+    }
 
-        Dimension preferred_size = new Dimension(75, 75);
+    public ChessBoard(Player white, Player black) {
+        this(new ChessSpot[8][8], white, black);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -29,14 +36,59 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
                     setcolor = new Color(0.87f,0.62f,0.53f);
                 }
                 _spots[i][j] = new ChessSpot(i,j,this,setcolor);
-                _spots[i][j].setPreferredSize(preferred_size);
+                _spots[i][j].setPreferredSize(new Dimension(75, 75));
                 add(_spots[i][j]);
             }
         }
+
+        HumanPlayer h = new HumanPlayer(Player.Color.BLACK);
+        HumanPlayer w = new HumanPlayer(Player.Color.WHITE);
+
+        _spots[0][0].setPiece(new Rook(this,h,0,0));
+        _spots[1][0].setPiece(new Knight(this,h,1,0));
+        _spots[2][0].setPiece(new Bishop(this,h,2,0));
+        _spots[3][0].setPiece(new Queen(this,h,3,0));
+        _spots[4][0].setPiece(new King(this,h,4,0));
+        _spots[5][0].setPiece(new Bishop(this,h,5,0));
+        _spots[6][0].setPiece(new Knight(this,h,6,0));
+        _spots[7][0].setPiece(new Rook(this,h,7,0));
+
+        _spots[0][1].setPiece(new Pawn(this,h,0,1));
+        _spots[1][1].setPiece(new Pawn(this,h,1,1));
+        _spots[2][1].setPiece(new Pawn(this,h,2,1));
+        _spots[3][1].setPiece(new Pawn(this,h,3,1));
+        _spots[4][1].setPiece(new Pawn(this,h,4,1));
+        _spots[5][1].setPiece(new Pawn(this,h,5,1));
+        _spots[6][1].setPiece(new Pawn(this,h,6,1));
+        _spots[7][1].setPiece(new Pawn(this,h,7,1));
+
+        _spots[0][7].setPiece(new Rook(this,w,0,7));
+        _spots[1][7].setPiece(new Knight(this,w,1,7));
+        _spots[2][7].setPiece(new Bishop(this,w,2,7));
+        _spots[3][7].setPiece(new King(this,w,3,7));
+        _spots[4][7].setPiece(new Queen(this,w,4,7));
+        _spots[5][7].setPiece(new Bishop(this,w,5,7));
+        _spots[6][7].setPiece(new Knight(this,w,6,7));
+        _spots[7][7].setPiece(new Rook(this,w,7,7));
+        
+        _spots[0][6].setPiece(new Pawn(this,w,0,6));
+        _spots[1][6].setPiece(new Pawn(this,w,1,6));
+        _spots[2][6].setPiece(new Pawn(this,w,2,6));
+        _spots[3][6].setPiece(new Pawn(this,w,3,6));
+        _spots[4][6].setPiece(new Pawn(this,w,4,6));
+        _spots[5][6].setPiece(new Pawn(this,w,5,6));
+        _spots[6][6].setPiece(new Pawn(this,w,6,6));
+        _spots[7][6].setPiece(new Pawn(this,w,7,6));
     }
 
     public ChessSpot getSpotAt(int x, int y) {
         return _spots[x][y];
+    }
+
+    public void applyMove(Move move) {
+        _spots[move.getEndX()][move.getEndY()].setPiece(_spots[move.getStartX()][move.getStartY()].getPiece());
+        _spots[move.getStartX()][move.getStartY()].setPiece(null);
+        // TODO add special cases like pawns slaughtering with hook thing
     }
 
     public void addChessSpotListener(ChessSpotListener c) {
@@ -69,5 +121,28 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
     @Override
     public Iterator<ChessSpot> iterator() {
         return new ChessBoardIterator(this);
+    }
+
+    public ChessBoard clone() {
+        ChessSpot[][] newSpots = new ChessSpot[_spots.length][_spots[0].length];
+        ChessBoard output = new ChessBoard(newSpots, getWhite(), getBlack());
+        for (int i = 0; i < newSpots.length; i++) {
+            for (int j = 0; j < newSpots[0].length; j++) {
+                newSpots[i][j] = _spots[i][j].clone(output);
+            }
+        }
+        return output;
+    }
+
+    public Player getPlayerNot(Player p) {
+        return (p.getColor() == Player.Color.WHITE) ? _black : _white;
+    }
+
+    public Player getWhite() {
+        return _white;
+    }
+
+    public Player getBlack() {
+        return _black;
     }
 }
