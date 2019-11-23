@@ -9,7 +9,7 @@ import java.awt.GridLayout;
 import java.util.Iterator;
 import java.awt.Dimension;
 
-public class ChessBoard extends JPanel {
+public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
 
     private ChessSpot[][] _spots;
     private ChessSpot _selected; 
@@ -107,7 +107,8 @@ public class ChessBoard extends JPanel {
         try {old_selection.deselectSpot();} catch (NullPointerException e) {}
     }
 
-    public Iterator<ChessSpot> iterate() {
+    @Override
+    public Iterator<ChessSpot> iterator() {
         return new ChessBoardIterator(this);
     }
 }
