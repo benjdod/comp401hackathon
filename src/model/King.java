@@ -1,5 +1,6 @@
 package model;
 
+import main.ChessBoard;
 import main.Player;
 
 public class King extends ChessPiece {
@@ -7,7 +8,7 @@ public class King extends ChessPiece {
         super(color, startX, startY);
     }
 
-    public boolean getCanMoveToPosition(int x, int y) {
+    public boolean getCanMoveToPosition(ChessBoard b, int x, int y) {
         return (Math.abs(this.getX() - x) <= 1 || Math.abs(this.getY() - y) <= 1) ? true : false;
     }
 

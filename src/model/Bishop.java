@@ -8,7 +8,7 @@ public class Bishop extends ChessPiece {
         super(color, startX, startY);
     }
 
-    public boolean getCanMoveToPosition(int x, int y) {
+    public boolean getCanMoveToPosition(ChessBoard b, int x, int y) {
         return (this.getX() + this.getY() == x + y || this.getY() - this.getX() == y - x) ? true : false;
     }
 
