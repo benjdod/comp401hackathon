@@ -45,28 +45,16 @@ public class AIPlayer implements Player {
             }
 
             // We now know that the piece is our piece, and not just some empty square or the opponents piece.
+            // This means that we can add all moves that the piece can make to the output.
             ChessPiece piece = spot.getPiece();
-
+            for (Move m : piece.getAllPossibleMoves()) {
+                output.add(m);
+            }
         }
+        return output.stream().toArray(Move[]::new);
     }
 
+    private int getWorstCaseAfter(Move m) {
 
-//    public Move getRandomMoveFrom(int x, int y) {
-//      ArrayList<Move> eligibleMoves = new ArrayList<>();
-//
-//      for (ChessSpot s : _board) {
-//          if (s.getPiece() != null && s.getPiece().getPlayer().getColor().equals(_color)) {
-//              ChessPiece p = s.getPiece();
-//              if (p.getCanMoveToPosition(x, y)) {
-//                  eligibleMoves.add(new Move(this, s.getPiece().getX(), s.getPiece().getY(), x, y));
-//              }
-//          }
-//      }
-//
-//        Random r = new Random();
-//        int moveToSelect = r.nextInt(eligibleMoves.size()-1);
-//
-//        return (eligibleMoves.size() > 0) ? eligibleMoves.get(moveToSelect) : null;
-//    }
-
+    }
 }
