@@ -7,16 +7,17 @@ import java.util.Random;
 public class AIPlayer implements Player {
 
     private Player.Color _color;
+    private ChessBoard _board;
 
-    public AIPlayer(Color color)
-  {
-    this._color = color;
-  }
+    public AIPlayer(Color color, ChessBoard board) {
+        _color = color;
+        _board = board;
+    }
 
-    public Move getRandomMoveFrom(ChessBoard board, int x, int y) {
-      ArrayList<Move> eligibleMoves = new ArrayList<Move>();
+    public Move getRandomMoveFrom(int x, int y) {
+      ArrayList<Move> eligibleMoves = new ArrayList<>();
 
-      for (ChessSpot s : board) {
+      for (ChessSpot s : _board) {
           if (s.getPiece() != null && s.getPiece().getPlayer().getColor().equals(_color)) {
               ChessPiece p = s.getPiece();
               if (p.getCanMoveToPosition(x, y)) {
@@ -31,13 +32,13 @@ public class AIPlayer implements Player {
         return (eligibleMoves.size() > 0) ? eligibleMoves.get(moveToSelect) : null;
     }
 
-  @Override
-  public Move getNextMove(ChessBoard board) {
-    return null; // FIXME make this smarter
-  }
+      @Override
+      public Move getNextMove(ChessBoard board) {
+            return null; // FIXME make this smarter
+      }
 
-  @Override
-  public Color getColor() {
-    return _color;
-  }
+      @Override
+      public Color getColor() {
+            return _color;
+      }
 }
