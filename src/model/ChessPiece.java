@@ -73,4 +73,12 @@ public abstract class ChessPiece {
         }
         return output;
     }
+
+    public void setX(int x) {
+        _x = x;
+    }
+
+    public void setY(int y) {
+        _y = y;
+    }
 }

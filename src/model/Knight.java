@@ -14,39 +14,39 @@ public class Knight extends ChessPiece {
     }
 
     public boolean getCanMoveToPosition(int x, int y) {
-
-        ArrayList<Move> possibleMoves = getAllPossibleMoves();
-
-        Move moveCheck = new Move(this.getPlayer(), this.getX(), this.getY(), x, y);
-
-        boolean isPossibleMove = false;
-        for(int i = 0; i < possibleMoves.size(); i++) {
-            if(possibleMoves.get(i).equals(moveCheck)) {
-                isPossibleMove = true;
-            }
+        if (_board.getSpotAt(x,y).getPiece() == null) {
+            return getIsKnightMove(new Move(getPlayer(), getX(), getY(), x, y));
         }
-        return isPossibleMove;
+        if (_board.getSpotAt(x, y).getPiece().getPlayer() != getPlayer()) {
+            return getIsKnightMove(new Move(getPlayer(), getX(), getY(), x, y));
+        }
+        return false;
     }
 
     public ArrayList<Move> getAllPossibleMoves() {
-
-        ArrayList <Move> allPossibleMoves = new ArrayList<Move>();
+        ArrayList <Move> allPossibleMoves = new ArrayList<>();
 
         for (ChessSpot s : _board) {
-
-            boolean isKnightMove = false;
-
-            if ((Math.abs(this.getX() - s.getSpotX()) == 2 && Math.abs(this.getY() - s.getSpotY()) == 1)
-                  || Math.abs(this.getX() - s.getSpotXCoord()) == 1 && Math.abs(this.getY() - s.getSpotX()) == 2) {
-                isKnightMove = true;
+            Move thisMove = new Move(getPlayer(), getX(), getY(), s.getSpotX(), s.getSpotY());
+            if (!getIsKnightMove(thisMove)) {
+                continue;
             }
 
-            if (isKnightMove && s.isEmpty()) {
-                allPossibleMoves.add(new Move(this.getPlayer(), this.getX(), this.getY(), s.getSpotX(), s.getSpotY()));
+            if (s.isEmpty() || s.getPiece().getPlayer().getColor() != getPlayer().getColor()) {
+                allPossibleMoves.add(thisMove);
             }
         }
 
+        if (allPossibleMoves.size() == 0) {
+            return null;
+        }
         return allPossibleMoves;
+    }
+
+    private boolean getIsKnightMove(Move m) {
+        int dy = Math.abs(m.getStartY()-m.getEndY());
+        int dx = Math.abs(m.getStartX()-m.getEndX());
+        return (dy == 2 && dx == 1) || (dy == 1 && dx == 2);
     }
 
     public int getNumPoints() {
