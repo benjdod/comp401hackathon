@@ -19,9 +19,6 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
     HumanPlayer h;
     HumanPlayer w;
 
-    public ChessBoard() {
-        _spots = new ChessSpot[8][8];
-    }
 
     private ChessBoard(ChessSpot[][] spots, Player white, Player black) {
         _spots = spots;
