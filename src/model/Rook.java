@@ -19,37 +19,11 @@ public class Rook extends ChessPiece {
     @Override
     public ArrayList<Move> getAllPossibleMoves() {
         ArrayList<Move> possibleMoves = new ArrayList<Move>();
-        possibleMoves.addAll(getAllMovesInDirection(1,0));
-        possibleMoves.addAll(getAllMovesInDirection(0,1));
-        possibleMoves.addAll(getAllMovesInDirection(-1,0));
-        possibleMoves.addAll(getAllMovesInDirection(0,-1));
+        possibleMoves.addAll(getLineMovesInDirection(1,0));
+        possibleMoves.addAll(getLineMovesInDirection(0,1));
+        possibleMoves.addAll(getLineMovesInDirection(-1,0));
+        possibleMoves.addAll(getLineMovesInDirection(0,-1));
         return possibleMoves;
-    }
-
-
-    public ArrayList<Move> getAllMovesInDirection(int dx, int dy) {
-        ArrayList<Move> output = new ArrayList<Move>();
-        int cx = this.getX();
-        int cy = this.getY();
-        for (int x = 0; x < 8; x++) {
-            cx += dx;
-            cy += dy;
-            if(cx >= 8 || cy >= 8 || cx < 0 || cy < 0) {
-                break;
-            }
-            if (!_board.getSpotAt(cx, cy).isEmpty()) {
-                if (_board.getSpotAt(cx, cy).getPiece().getPieceColor() == getPieceColor()) {
-                    break;
-                } else {
-                    output.add(new Move(getPlayer(), this.getX(), this.getY(), cx, cy));
-                    break;
-                }
-            } else {
-                output.add(new Move(getPlayer(), this.getX(), this.getY(), cx, cy));
-                continue;
-            }
-        }
-        return output;
     }
 
     public int getNumPoints() {
