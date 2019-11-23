@@ -23,7 +23,7 @@ public class AIPlayer implements Player {
          * This will involve a ton of virtual chessboards
          */
         Move best = null;
-        for (Move m : movesThisBotCouldMake(_board)) {
+        for (Move m : movesThisBotCouldMake()) {
             if (best == null || getWorstCaseAfter(best) < getWorstCaseAfter(m)) {
                 best = m;
             }
@@ -37,7 +37,18 @@ public class AIPlayer implements Player {
         return _color;
     }
 
+    private Move[] movesThisBotCouldMake() {
+        ArrayList<Move> output = new ArrayList<>();
+        for (ChessSpot spot : _board) {
+            if (spot.isEmpty() || spot.getPiece().getPlayer().getColor() != getColor()) {
+                continue;
+            }
 
+            // We now know that the piece is our piece, and not just some empty square or the opponents piece.
+            ChessPiece piece = spot.getPiece();
+
+        }
+    }
 
 
 //    public Move getRandomMoveFrom(int x, int y) {
