@@ -35,8 +35,8 @@ public class Knight extends ChessPiece {
 
             boolean isKnightMove = false;
 
-            if ((Math.abs(this.getX() - s.getSpotXCoord()) == 2 && Math.abs(this.getY() - getSpotYCoord())) == 1)
-                  || (Math.abs(this.getX() - s.getSpotXCoord())) == 1 && Math.abs(this.getY() - s.getSpotYCoord())) == 2)) {
+            if ((Math.abs(this.getX() - s.getSpotXCoord()) == 2 && Math.abs(this.getY() - s.getSpotYCoord()) == 1)
+                  || ((Math.abs(this.getX() - s.getSpotXCoord())) == 1 && Math.abs(this.getY() - s.getSpotYCoord()) == 2)) {
                 isKnightMove = true;
             }
 

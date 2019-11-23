@@ -13,7 +13,7 @@ public class Rook extends ChessPiece {
     }
 
     public boolean getCanMoveToPosition(int x, int y) {
-        return (this.getX() == x || this.getY() == y) ? true : false;
+        return this.getX() == x || this.getY() == y;
     }
 
     @Override
