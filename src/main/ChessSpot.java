@@ -27,6 +27,8 @@ public class ChessSpot extends JPanel implements MouseListener {
     private boolean _is_highlighted;
     private boolean _has_piece;
     private ChessPiece _piece;
+    private String _iconfilepath;
+    private JLabel _icon;
 
     private ArrayList<ChessSpotListener> _listeners = new ArrayList<ChessSpotListener>();
 
@@ -44,8 +46,8 @@ public class ChessSpot extends JPanel implements MouseListener {
         // FOR HANDLING IMAGES
 
         setLayout(new BorderLayout());
-        JLabel image = new JLabel(new ImageIcon("img/testdim75.png"));
-        add(image,BorderLayout.CENTER);
+        _icon = new JLabel();
+        add(_icon,BorderLayout.CENTER);
 
         addMouseListener(this);
     }
@@ -72,6 +74,10 @@ public class ChessSpot extends JPanel implements MouseListener {
 
     public void setPiece(ChessPiece piece) {
         _piece = piece;
+        String filepath = "img/"+_piece.getPlayer().getColor().name().toLowerCase()+_piece.getName().toLowerCase()+".png";
+        System.out.println(filepath);
+        _icon.setIcon(new ImageIcon(filepath));
+        trigger_update();
     }
 
     public void selectSpot() {
