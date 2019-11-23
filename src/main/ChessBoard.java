@@ -15,17 +15,8 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
     private ChessSpot _selected;
     private Player _black, _white;
 
-<<<<<<< HEAD
-    // temporary human players
-    HumanPlayer h;
-    HumanPlayer w;
-
-    public ChessBoard() {
-        _spots = new ChessSpot[8][8];
-=======
     private ChessBoard(ChessSpot[][] spots, Player white, Player black) {
         _spots = spots;
->>>>>>> 6d6f62a5200c49f116c9a76228b78f2deeecdf72
         _selected = null;
         _black = black;
         _white = white;
@@ -98,7 +89,6 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         return new ChessBoardIterator(this);
     }
 
-<<<<<<< HEAD
     // this should ONLY be run when starting a new game
     public void resetPieces() {
         for (int i = 0; i < 8; i++) {
@@ -142,7 +132,6 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         _spots[5][6].setPiece(new Pawn(this,w,5,6));
         _spots[6][6].setPiece(new Pawn(this,w,6,6));
         _spots[7][6].setPiece(new Pawn(this,w,7,6));
-=======
     public ChessBoard clone() {
         ChessSpot[][] newSpots = new ChessSpot[_spots.length][_spots[0].length];
         ChessBoard output = new ChessBoard(newSpots, getWhite(), getBlack());
@@ -164,6 +153,5 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
 
     public Player getBlack() {
         return _black;
->>>>>>> 6d6f62a5200c49f116c9a76228b78f2deeecdf72
     }
 }
