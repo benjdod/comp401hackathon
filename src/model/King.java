@@ -24,7 +24,20 @@ public class King extends ChessPiece {
 
     @Override
     public ArrayList<Move> getAllPossibleMoves() {
-        return null; // FIXME write this
+        ArrayList<Move> output = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            try {
+                int thisX = getX();
+                int thisY = getY();
+                thisX += (i > 0 && i < 5) ? 1 : (i > 5) ? -1 : 0;
+                thisY += (i > 2 && i < 6) ? -1 : (i == 2 || i == 6) ? 0 : 1;
+                if (getCanMoveToPosition(thisX, thisY)) {
+                    Move temp = new Move(getPlayer(), getX(), getY(), thisX, thisY);
+                    output.add(temp);
+                }
+            } catch (Exception e) {}
+        }
+        return output;
     }
 
     @Override

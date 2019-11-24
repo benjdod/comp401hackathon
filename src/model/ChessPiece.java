@@ -28,7 +28,14 @@ public abstract class ChessPiece {
         return _y;
     }
 
-    public abstract boolean getCanMoveToPosition(int x, int y);
+    public boolean getCanMoveToPosition(int x, int y) {
+        Move thisMove = new Move(getPlayer(), getX(), getY(), x, y);
+        for (Move m : getAllPossibleMoves()) {
+            if (m.equals(thisMove)) return true;
+        }
+        return false;
+    }
+
     public abstract ArrayList<Move> getAllPossibleMoves();
     public abstract int getNumPoints();
     public abstract String getName(); // "King", "Queen", "Pawn", etc.
@@ -55,13 +62,15 @@ public abstract class ChessPiece {
 
             Move thisMove = new Move(getPlayer(), this.getX(), this.getY(), currentX, currentY);
             ChessSpot thisSpot = _board.getSpotAt(currentX, currentY);
-            Player.Color thisColor = thisSpot.getPiece().getPieceColor();
+
             // This runs for each spot in a row going away from the start position.
 
             if (thisSpot.isEmpty()) {
                 output.add(thisMove);
                 continue;
             }
+
+            Player.Color thisColor = thisSpot.getPiece().getPieceColor();
 
             if (thisColor == getPlayer().getColor()) {
                 break;

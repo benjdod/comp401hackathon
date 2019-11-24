@@ -131,8 +131,8 @@ public class ChessBoard extends JPanel implements Iterable<ChessSpot> {
         _spots[0][7].setPiece(new Rook(this,_black,0,7));
         _spots[1][7].setPiece(new Knight(this,_black,1,7));
         _spots[2][7].setPiece(new Bishop(this,_black,2,7));
-        _spots[3][7].setPiece(new King(this,_black,3,7));
-        _spots[4][7].setPiece(new Queen(this,_black,4,7));
+        _spots[3][7].setPiece(new Queen(this,_black,3,7));
+        _spots[4][7].setPiece(new King(this,_black,4,7));
         _spots[5][7].setPiece(new Bishop(this,_black,5,7));
         _spots[6][7].setPiece(new Knight(this,_black,6,7));
         _spots[7][7].setPiece(new Rook(this,_black,7,7));

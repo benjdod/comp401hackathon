@@ -38,4 +38,12 @@ public class Move {
     public Player getPlayerMoving() {
         return playerMoving;
     }
+
+    public boolean equals(Move other) {
+        return getPlayerMoving().getColor() == other.getPlayerMoving().getColor() &&
+                getStartX() == other.getStartX() &&
+                getStartY() == other.getStartY() &&
+                getEndX() == other.getEndX() &&
+                getEndY() == other.getEndY();
+    }
 }

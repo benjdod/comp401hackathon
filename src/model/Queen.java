@@ -13,12 +13,6 @@ public class Queen extends ChessPiece {
     }
 
     @Override
-    public boolean getCanMoveToPosition(int x, int y) {
-        return (this.getX() == x || this.getY() == y ||
-        this.getX() + this.getY() == x + y || this.getY() - this.getX() == y - x) ? true : false;
-    }
-
-    @Override
     public ArrayList<Move> getAllPossibleMoves() {
         ArrayList<Move> possibleMoves = new ArrayList<Move>();
         possibleMoves.addAll(getLineMovesInDirection(1,0));

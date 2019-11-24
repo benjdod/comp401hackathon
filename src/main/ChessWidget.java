@@ -17,11 +17,11 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
 
     public ChessWidget() {
         HumanPlayer h = new HumanPlayer(Player.Color.WHITE);
-        HumanPlayer a = new HumanPlayer(Player.Color.BLACK);
+        AIPlayer a = new AIPlayer(Player.Color.BLACK);
         _h = h; _a = a;
         turn = h;
         _board = new ChessBoard(h, a);
-//        a.setBoard(_board);
+        a.setBoard(_board);
         setLayout(new BorderLayout());
         add(_board, BorderLayout.CENTER);
         _board.addChessSpotListener(this);
@@ -81,6 +81,9 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
                 for (ChessSpot s : _board) {
                     s.unhighlight();
                 }
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {}
                 testForAI();
             }
         }
@@ -94,9 +97,9 @@ public class ChessWidget extends JPanel implements ChessSpotListener, ActionList
     }
 
     private void testForAI() {
-//        if (turn.equals(_board.getBlack())) {
-//            _board.applyMove(((AIPlayer) _board.getBlack()).getNextMove());
-//            turn = _board.getPlayerNot(turn);
-//        } fixme later
+        if (turn.equals(_board.getBlack())) {
+            _board.applyMove(((AIPlayer) _board.getBlack()).getNextMove());
+            turn = _board.getPlayerNot(turn);
+        }
     }
 }

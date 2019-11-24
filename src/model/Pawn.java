@@ -13,21 +13,19 @@ public class Pawn extends ChessPiece {
     }
 
     @Override
-    public boolean getCanMoveToPosition(int x, int y) {
-        boolean distTwo = false;
-        boolean distOne = getAllPossibleMoves().get(0).getEndX() == x && getAllPossibleMoves().get(0).getEndY() == y;
-        try {
-            distTwo = getAllPossibleMoves().get(1).getEndX() == x && getAllPossibleMoves().get(1).getEndY() == y;
-        } catch (Exception e) {}
-        return distOne || distTwo;
-    }
-
-    @Override
     public ArrayList<Move> getAllPossibleMoves() {
         ArrayList<Move> moves = new ArrayList<Move>();
         int x = this.getX();
         int y = this.getY();
-        moves.add(new Move(getPlayer(), x, y, x, y+ ((getPlayer().getColor() == Player.Color.WHITE) ? 1 : -1)));
+        int newPlusOneY = y + ((getPlayer().getColor() == Player.Color.WHITE) ? 1 : -1);
+        int newPlusTwoY = y+ ((getPlayer().getColor() == Player.Color.WHITE) ? 2 : -2);
+        if (!_board.getSpotAt(x, newPlusOneY).isEmpty()) {
+            return moves;
+        }
+        moves.add(new Move(getPlayer(), x, y, x, newPlusOneY));
+        if (!_board.getSpotAt(x, newPlusTwoY).isEmpty()) {
+            return moves;
+        }
         if (thisPawnIsInStartRow()) {
             moves.add(new Move(getPlayer(), x, y, x, y+ ((getPlayer().getColor() == Player.Color.WHITE) ? 2 : -2)));
         }

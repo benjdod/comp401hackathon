@@ -1,6 +1,7 @@
 package main;
 import model.ChessPiece;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,14 +25,57 @@ public class AIPlayer implements Player {
          *   result in largest point advantage for the bot.
          * This will involve a ton of virtual chessboards
          */
-        Move best = null;
-        for (Move m : allPossibleMovesFor(this, _board)) {
-            if (best == null || getWorstCaseAfter(best) < getWorstCaseAfter(m)) {
-                best = m;
+        ArrayList<Move> bests = null;
+        bests = replaceArrayContentsWithTheBest(allPossibleMovesFor(this, _board), _board);
+
+        // Now, take each best, and then find the VERY best from those.
+        int twoLayerBest = -10000;
+        Move veryBest = null;
+        System.out.println("A");
+        for (Move best : bests) {
+            ChessBoard temp = _board.clone();
+            temp.applyMove(best);
+            int worstPointsForThisHumanMove = 10000;
+            System.out.println("B " + allPossibleMovesFor(_board.getPlayerNot(this), temp).size());
+            for (Move humanMove : allPossibleMovesFor(_board.getPlayerNot(this), temp)) {
+                ChessBoard reallyTemp = temp.clone();
+                reallyTemp.applyMove(humanMove);
+                ArrayList<Move> tempBests = allPossibleMovesFor(this, reallyTemp);
+                int bestPointsForFutureBotMove = -10000;
+                System.out.println("C");
+                for (Move futureBotMove : tempBests) {
+                    ChessBoard reallyReallyTemp = reallyTemp.clone();
+                    reallyReallyTemp.applyMove(futureBotMove);
+                    int  pointsForThis = getPointsForBoard(reallyReallyTemp);
+                    System.out.println("D");
+                    if (pointsForThis > bestPointsForFutureBotMove) {
+                        bestPointsForFutureBotMove = pointsForThis;
+                    }
+                }
+                if (bestPointsForFutureBotMove < worstPointsForThisHumanMove) {
+                    worstPointsForThisHumanMove = bestPointsForFutureBotMove;
+                }
+            }
+            if (worstPointsForThisHumanMove > twoLayerBest) {
+                twoLayerBest = worstPointsForThisHumanMove;
+                veryBest = best;
             }
         }
+        return veryBest;
+    }
 
-        return best;
+    private ArrayList<Move> replaceArrayContentsWithTheBest(ArrayList<Move> bests, ChessBoard board) {
+        ArrayList<Move> newBests = null;
+        for (Move m : bests) {
+            if (newBests == null || getWorstCaseAfter(newBests.get(0), board) < getWorstCaseAfter(m, board)) {
+                newBests = new ArrayList<>();
+                newBests.add(m);
+            } else if (getWorstCaseAfter(newBests.get(0), board) == getWorstCaseAfter(m, board)) {
+                newBests = new ArrayList<>();
+                newBests.add(m);
+            }
+        }
+        return newBests;
     }
 
     @Override
@@ -39,28 +83,30 @@ public class AIPlayer implements Player {
         return _color;
     }
 
-    private Move[] allPossibleMovesFor(Player p, ChessBoard b) {
+    private ArrayList<Move> allPossibleMovesFor(Player p, ChessBoard b) {
         ArrayList<Move> output = new ArrayList<>();
-        if (b == null) {
-            System.out.println("NULL");
-        }
         for (ChessSpot spot : b) {
             if (spot.isEmpty() || spot.getPiece().getPlayer().getColor() != p.getColor()) {
+//                System.out.println("SPOT WRONG COLOR OR NULL");
                 continue;
             }
 
             // We now know that the piece is our piece, and not just some empty square or the opponents piece.
             // This means that we can add all moves that the piece can make to the output.
             ChessPiece piece = spot.getPiece();
-            for (Move m : piece.getAllPossibleMoves()) {
-                output.add(m);
+//            System.out.println("..SpotWithCorrectColor - has num of " + piece.getAllPossibleMoves());
+            if (piece.getAllPossibleMoves() != null) {
+                for (Move m : piece.getAllPossibleMoves()) {
+                    output.add(m);
+                }
             }
         }
-        return output.stream().toArray(Move[]::new);
+//        System.out.println("RETURN SIZE: " + output.size());
+        return output;
     }
 
-    private int getWorstCaseAfter(Move m) {
-        ChessBoard newBoard = _board.clone();
+    private int getWorstCaseAfter(Move m, ChessBoard board) {
+        ChessBoard newBoard = board.clone();
 
         // Quick check so that the AI won't care about the opponent killing it's
         //   king AFTER the other king has already died.
@@ -69,7 +115,7 @@ public class AIPlayer implements Player {
         }
 
         newBoard.applyMove(m);
-        Move[] moves = allPossibleMovesFor(_board.getPlayerNot(this), newBoard);
+        ArrayList<Move> moves = allPossibleMovesFor(board.getPlayerNot(this), newBoard);
         int lowestScoreAfterM = 10000;  // Every score is lower than this, so it will be replaced.
         for (Move move : moves) {
             ChessBoard temp = newBoard.clone();

@@ -98,7 +98,6 @@ public class ChessSpot extends JPanel implements MouseListener {
         if (piece != null) {
             _piece = piece;
             String filepath = "img/"+_piece.getPlayer().getColor().name().toLowerCase()+_piece.getName().toLowerCase()+".png";
-            System.out.println(filepath);
             _icon.setIcon(new ImageIcon(filepath));
             trigger_update();
         } else {
@@ -192,14 +191,9 @@ public class ChessSpot extends JPanel implements MouseListener {
     }
 
     public ChessSpot clone(ChessBoard newBoard) {
-        return new ChessSpot(_x, _y, newBoard, _bgcolor);
+        ChessSpot output = new ChessSpot(_x, _y, newBoard, _bgcolor);
+        output.setPiece(getPiece());
+        return output;
     }
 
-    public int getSpotXCoord() {
-        return (getSpotX()+10) / getWidth();
-    }
-
-    public int getSpotYCoord() {
-        return (getSpotY()+10) / getHeight();
-    }
 }

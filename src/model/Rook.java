@@ -12,10 +12,6 @@ public class Rook extends ChessPiece {
         super(board, player, startX, startY);
     }
 
-    public boolean getCanMoveToPosition(int x, int y) {
-        return this.getX() == x || this.getY() == y;
-    }
-
     @Override
     public ArrayList<Move> getAllPossibleMoves() {
         ArrayList<Move> possibleMoves = new ArrayList<Move>();
